@@ -4,11 +4,12 @@ import pandas as pd
 from torch.utils.data import Dataset
 from torchvision.io import decode_image
 
+
 class AnimalDataset(Dataset):
     def __init__(self, annotations_file, transform=None, target_transform=None):
         self.data = annotations_file
-        self.img_labels = self.data['label_encoded'].values
-        self.img_dir = self.data['img_path'].values
+        self.img_labels = self.data["label_encoded"].values
+        self.img_dir = self.data["img_path"].values
         self.transform = transform
         self.target_transform = target_transform
 

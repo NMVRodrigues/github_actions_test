@@ -1,10 +1,14 @@
 import os
+import sys
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import pandas as pd
 import pytest
 import torch
-from utils.torch_dataset import AnimalDataset
+from src.utils.torch_dataset import AnimalDataset
 from torchvision.transforms import v2
 from torch.utils.data import DataLoader
+
 
 @pytest.mark.parametrize("batch_size", [8, 16, 32, 64])
 def test_different_batch_sizes(batch_size):
@@ -12,7 +16,6 @@ def test_different_batch_sizes(batch_size):
 
     data = os.path.join("data", "animal_data.parquet")
     data = pd.read_parquet(data)
-
 
     transforms = v2.Compose(
         [
@@ -30,6 +33,5 @@ def test_different_batch_sizes(batch_size):
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     assert dataloader is not None
-    assert len(dataloader) > 0  
+    assert len(dataloader) > 0
     assert dataloader.batch_size == batch_size
-

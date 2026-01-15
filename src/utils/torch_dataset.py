@@ -1,4 +1,5 @@
 import os
+import torch
 import pandas as pd
 from torch.utils.data import Dataset
 from torchvision.io import decode_image
@@ -6,7 +7,7 @@ from torchvision.io import decode_image
 class AnimalDataset(Dataset):
     def __init__(self, annotations_file, transform=None, target_transform=None):
         self.data = annotations_file
-        self.img_labels = self.data['label'].values
+        self.img_labels = self.data['label_encoded'].values
         self.img_dir = self.data['img_path'].values
         self.transform = transform
         self.target_transform = target_transform
@@ -17,7 +18,7 @@ class AnimalDataset(Dataset):
     def __getitem__(self, idx):
         img_path = self.img_dir[idx]
         image = decode_image(img_path)
-        label = self.img_labels[idx]
+        label = torch.tensor(self.img_labels[idx])
         if self.transform:
             image = self.transform(image)
         if self.target_transform:

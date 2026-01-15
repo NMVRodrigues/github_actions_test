@@ -18,6 +18,11 @@ def main():
 
 
     df = pd.DataFrame(data)
+
+    label_map = {"cane": 0, "cavallo": 1, "elefante": 2, "farfalla": 3, "gallina": 4, "gatto": 5, "mucca": 6, "pecora": 7, "ragno": 8, "scoiattolo": 9}
+
+    df['label_encoded'] = df['label'].apply(lambda x: label_map[x])
+
     df.to_parquet(os.path.join('data', 'animal_data.parquet'))
 
 if __name__ == '__main__':

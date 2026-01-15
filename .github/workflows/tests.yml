@@ -1,4 +1,4 @@
-name: Tests
+name: Functionality tests
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest torch torchvision
+        pip install pytest torch torchvision parquet-tools pyarrow
         # Install your project dependencies
         pip install -r requirements.txt
     

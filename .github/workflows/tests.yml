@@ -27,5 +27,5 @@ jobs:
         pip install -r requirements.txt
     
     - name: Run data loading tests
-      run: pytest tests/test_dataloaders.py -v
+      run: pytest tests/test_vgg16.py -v
     
